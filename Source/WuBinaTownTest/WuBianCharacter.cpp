@@ -117,6 +117,19 @@ void AWuBianCharacter::BeginPlay()
 	
 }
 
+void AWuBianCharacter::PrimaryAttack()
+{
+	FTransform SpawnMG = FTransform(GetControlRotation(), GetActorLocation());//确定产生位置
+
+	FActorSpawnParameters Spawnparams;
+	
+	Spawnparams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;//确定产生规则
+
+	GetWorld()->SpawnActor<AActor>(ProjectileClass,SpawnMG,Spawnparams);
+
+
+}
+
 void AWuBianCharacter::MoveFoward(float value)
 {
 	FRotator ControlRot = GetControlRotation();
@@ -156,7 +169,7 @@ void AWuBianCharacter::EndAcceleratioan()
 
 void AWuBianCharacter::SlowWalk()
 {
-	if (CurrentCharacterState != CS_SlowWalk)
+	if (CurrentCharacterState != CMS_SlowWalk)
 	{
 
 	}
@@ -262,6 +275,7 @@ void AWuBianCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AWuBianCharacter::Interact);
 	PlayerInputComponent->BindAction("ToggleInventory", IE_Pressed, this, &AWuBianCharacter::ToggleInventory);
 
+	PlayerInputComponent->BindAction("PrimaryAttack", IE_Pressed, this, &AWuBianCharacter::PrimaryAttack);
 
 }
 

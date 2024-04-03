@@ -22,10 +22,15 @@ public:
 
 	enum ECharacterState :UINT8
 	{
-		CS_Standby,
-		CS_NormalWalk,
-		CS_SlowWalk,
-		CS_Run
+		CS_AttackModel,
+		CS_NormalModel
+	};
+
+	enum EChaMoveState :UINT8
+	{
+		CMS_NormalWalk,
+		CMS_SlowWalk,
+		CMS_Run
 	};
 
 
@@ -85,6 +90,8 @@ protected:
 
 
 
+	void PrimaryAttack();
+
 	void MoveFoward(float value);
 
 	void MoveRight(float value);
@@ -120,6 +127,9 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TArray<APickup*>Inventory;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AActor> ProjectileClass;
 
 	
 
